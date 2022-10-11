@@ -13,44 +13,65 @@
 %\usepackage{cyr}
 \usepackage{epsf}
 
+\usepackage[top=20mm, bottom=20mm, left=20mm, right=20mm]{geometry}
+
 \title{How many levels is needed in non-stationary regime?}
 
 \begin{document}
 \maketitle
     
-\section{Stationary equations for 1D case}
+\section{Sources of hydrogen atom levels populations in 1D case}
 
 Sources of populations for each hydrogen energy level are written as
 \begin{equation}\label{eq:sources}
     \begin{aligned}
-    \sigma_i = & \left[\sum\limits_{k=i+1}^\infty n_k (A_{ki} + B_{ki}J_{ki}) + \sum\limits_{j=1}^{i-1} n_jB_{ji}J_{ij} +  n_e \sum\limits_{j\neq i}^\infty n_jq_{ji}\right] -  \\ 
-    -n_i & \left[ \sum\limits_{j=1}^{i-1} (A_{ij} + B_{ij}J_{ij}) + \sum\limits_{k=i+1}^\infty B_{ik}J_{ik} + n_e ( q_{ic} + \sum\limits_{j \neq i}^\infty q_{ij} ) + B_{ic}WJ_{ic}^\star \right] +  \\
-     +& n_e^2C_i + n_e^3Q_{ci},\ \ i=1,\ 2,\ 3... 
+        \sigma_i &= \sum\limits_{k=i+1}^\infty n_k(A_{ki} + B_{ki}J_{ki}) + \sum\limits_{j=1}^{i-1} n_jB_{ji}J_{ij}+ n_e^2(A_{ci} + WB_{ci})+\\
+        &+n_e\left(\sum\limits_{j\neq i}n_jq_{ji}  + n_e^2q_{ci}\right)-\\
+        &-n_i\left(\sum\limits_{j=1}^{i-1}(A_{ij} + B_{ij}J_{ij}) + \sum\limits_{k=i+1}^\infty B_{ik}J_{ki} + WB_{ic}\right) -\\
+        &-n_in_e\left(q_{ic} + \sum\limits_{i \neq j}q_{ij}\right)
     \end{aligned}
 \end{equation}
-The line intensity \(J_{ki}\) can be calculated using Sobolev's approximation
-\[
-J_{ik} = S_{ik}(1 - \beta_{ki}) + WI_{ik}\beta_{ki},
-\]
-where
-\[
-S_{ik} = \frac{2h\nu_{ik}^3}{c^2}\left(\frac{n_kg_i}{n_ig_k} - 1\right)^{-1},
-\]
-\[
-I_{ik} = \frac{2h\nu_{ik}^3}{c^2}\left(e^{\frac{h\nu_{ik}}{k_BT_s}} - 1\right)^{-1}.
-\]
-\(\beta_{ki}\) is the photon escape propability
-\[
-\beta_{ki} = \frac{1-e^{\tau_{ki}}}{\tau_{ki}},
-\]
-\[
-\tau_{ki} = \frac{\pi e^2 f_{ik} z}{m_e \nu_{ik} v} n_i \left(1 - \frac{n_kg_i}{n_ig_k}\right).
-\]
-Equations \eqref{eq:sources} can be simplified using Menzel parameters \(b_i\), defined by
+It's convinient to introduce so called Menzel parameters \(b_i\), defined by
 \begin{equation}\label{eq:menzel}
     \frac{n_i}{n_e^2} = b_i\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i},
 \end{equation}
-where \(X_j = 13.6\ \mathrm{eV}/(i^2k_BT_e)\). Substituting \eqref{eq:menzel} in \eqref{eq:sources}
+where \(X_j = 13.6\ \mathrm{eV}/(i^2k_BT_e)\). Substituting \(b_i\) in \eqref{eq:sources} and using the relations between collisonal coefficients
+\[
+\frac{q_{ci}}{q_{ic}} = \frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}\ \mathrm{and}\  \frac{q_{ul}}{q_{lu}} = \frac{l^2}{u^2}e^{X_l - X_u}
+\]
+\begin{equation}
+    \begin{aligned}
+        \frac{(2\pi m_ek_BT_e)^{3/2}}{n_e^2i^2h^3}e^{-X_i}\sigma_i &= \sum\limits_{k=i+1}^\infty b_k\frac{k^2}{i^2}e^{X_k-X_i}(A_{ki} + B_{ki}J_{ki}) + \sum\limits_{j=1}^{i-1} b_j\frac{j^2}{i^2}e^{X_j-X_i}B_{ji}J_{ij} +\\
+        &+\frac{(2\pi m_ek_BT_e)^{3/2}}{i^2n_e^2h^3}e^{-X_i}(A_{ci} + WB_{ci}) +n_e\left(\sum\limits_{j \neq i}(b_j-b-i)q_{ij}  + q_{ci}\right)-\\
+        &-b_i\left(\sum\limits_{j=1}^{i-1}(A_{ij} + B_{ij}J_{ij}) + \sum\limits_{k=i+1}^\infty B_{ik}J_{ki} + WB_{ic}\right) -\\
+        &-b_in_e\left(q_{ic} + \sum\limits_{i \neq j}q_{ij}\right)
+    \end{aligned}
+\end{equation}
+Then, applying Sobolev approximation,
+\[
+J_{ul} = \frac{2h\nu_{ul}^3}{c^2}\left(\overline{S}_{ul}(1-\beta_{lu}) + W\beta_{lu} \overline{I^\star}_{ul}\right),
+\]
+assuming CFR
+\[
+\overline{S}_{ul} = \left(\frac{n_l}{n_u}\frac{u^2}{l^2} - 1\right)^{-1} = \left(\frac{b_l}{b_u}e^{X_l-X_u} - 1\right)^{-1}
+\]
+and black-body star
+\[
+\overline{I^\star}_{ul} = \left(e^{X_l - X_u} - 1\right)^{-1}
+\]
+and using relations between einstein coefficients
+\[
+A_{ul} = \frac{2h\nu_{ul}^3}{c^2}B_{ul}\ \mathrm{and}\ \frac{B_{ul}}{B_{lu}} = \frac{l^2}{u^2},
+\]
+we get
+\begin{equation}
+    \begin{aligned}
+        \frac{(2\pi m_ek_BT_e)^{3/2}}{n_e^2i^2h^3}e^{-X_i}\sigma_i &= \sum\limits_{k=i+1}^\infty b_k\frac{k^2}{i^2}e^{X_k-X_i}A_{ki}(\beta_{ik} + W\overline{I^\star}_{ki}\beta_{ik}) + \sum\limits_{j=1}^{i-1} b_je^{X_j-X_i}A_{ij}W\beta_{ji} \overline{I^\star}_{ij} +\\
+        &+\frac{(2\pi m_ek_BT_e)^{3/2}}{i^2n_e^2h^3}e^{-X_i}(A_{ci} + WB_{ci}) +n_e\left(\sum\limits_{j \neq i}(b_j-b_i)q_{ij}  + q_{ci}\right)-\\
+        &-b_i\left(\sum\limits_{j=1}^{i-1}A_{ij}(\beta_{ji} + W\overline{I^\star}_{ij}\beta_{ji}) + \sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}  + WB_{ic}\right).
+    \end{aligned}
+\end{equation}
 
+\section{Sources linearization}
 
 \end{document}
