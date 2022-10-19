@@ -42,7 +42,7 @@ where \(X_j = 13.6\ \mathrm{eV}/(i^2k_BT_e)\). Substituting \(b_i\) in \eqref{eq
 \begin{equation}
     \begin{aligned}
         \frac{(2\pi m_ek_BT_e)^{3/2}}{n_e^2i^2h^3}e^{-X_i}\sigma_i &= \sum\limits_{k=i+1}^\infty b_k\frac{k^2}{i^2}e^{X_k-X_i}(A_{ki} + B_{ki}J_{ki}) + \sum\limits_{j=1}^{i-1} b_j\frac{j^2}{i^2}e^{X_j-X_i}B_{ji}J_{ij} +\\
-        &+\frac{(2\pi m_ek_BT_e)^{3/2}}{i^2n_e^2h^3}e^{-X_i}(A_{ci} + WB_{ci}) +n_e\left(\sum\limits_{j \neq i}(b_j-b-i)q_{ij}  + q_{ci}\right)-\\
+        &+\frac{(2\pi m_ek_BT_e)^{3/2}}{i^2h^3}e^{-X_i}(A_{ci} + WB_{ci}) +n_e\left(\sum\limits_{j \neq i}(b_j-b_i)q_{ij}  + (1-b_i)q_{ic}\right)-\\
         &-b_i\left(\sum\limits_{j=1}^{i-1}(A_{ij} + B_{ij}J_{ij}) + \sum\limits_{k=i+1}^\infty B_{ik}J_{ki} + WB_{ic}\right) -\\
         &-b_in_e\left(q_{ic} + \sum\limits_{i \neq j}q_{ij}\right)
     \end{aligned}
@@ -66,9 +66,17 @@ A_{ul} = \frac{2h\nu_{ul}^3}{c^2}B_{ul}\ \mathrm{and}\ \frac{B_{ul}}{B_{lu}} = \
 we get
 \begin{equation}
     \begin{aligned}
-        \frac{(2\pi m_ek_BT_e)^{3/2}}{n_e^2i^2h^3}e^{-X_i}\sigma_i &= \sum\limits_{k=i+1}^\infty b_k\frac{k^2}{i^2}e^{X_k-X_i}A_{ki}(\beta_{ik} + W\overline{I^\star}_{ki}\beta_{ik}) + \sum\limits_{j=1}^{i-1} b_je^{X_j-X_i}A_{ij}W\beta_{ji} \overline{I^\star}_{ij} +\\
-        &+\frac{(2\pi m_ek_BT_e)^{3/2}}{i^2n_e^2h^3}e^{-X_i}(A_{ci} + WB_{ci}) +n_e\left(\sum\limits_{j \neq i}(b_j-b_i)q_{ij}  + q_{ci}\right)-\\
-        &-b_i\left(\sum\limits_{j=1}^{i-1}A_{ij}(\beta_{ji} + W\overline{I^\star}_{ij}\beta_{ji}) + \sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}  + WB_{ic}\right).
+        \frac{(2\pi m_ek_BT_e)^{3/2}}{n_e^2i^2h^3}e^{-X_i}\sigma_i &= \sum\limits_{k=i+1}^\infty b_k\frac{k^2}{i^2}e^{X_k-X_i}A_{ki}\beta_{ik}(1 + W\overline{I^\star}_{ki}) + \sum\limits_{j=1}^{i-1} b_je^{X_j-X_i}A_{ij}W\beta_{ji} \overline{I^\star}_{ij} +\\
+        &+\frac{(2\pi m_ek_BT_e)^{3/2}}{i^2h^3}e^{-X_i}(A_{ci} + WB_{ci}) +n_e\left(\sum\limits_{j \neq i}(b_j-b_i)q_{ij}  + (1-b_i)q_{ic}\right)-\\
+        &-b_i\left(\sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji}(1 + W\overline{I^\star}_{ij}) + \sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}  + WB_{ic}\right).
+    \end{aligned}
+\end{equation}
+
+\begin{equation}
+    \begin{aligned}
+        \frac{(2\pi m_ek_BT_e)^{3/2}}{n_e^2i^2h^3}e^{-X_i}\sigma_i &= \sum\limits_{k=i+1}^\infty n_kA_{ki}\beta_{ik}(1 + W\overline{I^\star}_{ki}) + \sum\limits_{j=1}^{i-1} n_j\frac{i^2}{j^2}A_{ij}W\beta_{ji} \overline{I^\star}_{ij} +n_e^2(A_{ci} + WB_{ci}) -\\
+        &-n_i\left(\sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji}(1 + W\overline{I^\star}_{ij}) + \sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}  + WB_{ic}\right) +\\
+        &+n_e\left(\sum\limits_{j \neq i}\left(n_j\frac{i^2}{j^2}e^{X_i-X_j}-n_i\right)q_{ij}  + \left(n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}-n_i\right)q_{ic}\right). 
     \end{aligned}
 \end{equation}
 
