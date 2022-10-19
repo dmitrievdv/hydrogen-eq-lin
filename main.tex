@@ -74,12 +74,54 @@ we get
 
 \begin{equation}
     \begin{aligned}
-        \frac{(2\pi m_ek_BT_e)^{3/2}}{n_e^2i^2h^3}e^{-X_i}\sigma_i &= \sum\limits_{k=i+1}^\infty n_kA_{ki}\beta_{ik}(1 + W\overline{I^\star}_{ki}) + \sum\limits_{j=1}^{i-1} n_j\frac{i^2}{j^2}A_{ij}W\beta_{ji} \overline{I^\star}_{ij} +n_e^2(A_{ci} + WB_{ci}) -\\
+        \sigma_i &= \sum\limits_{k=i+1}^\infty n_kA_{ki}\beta_{ik}(1 + W\overline{I^\star}_{ki}) + \sum\limits_{j=1}^{i-1} n_j\frac{i^2}{j^2}A_{ij}W\beta_{ji} \overline{I^\star}_{ij} +n_e^2(A_{ci} + WB_{ci}) -\\
         &-n_i\left(\sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji}(1 + W\overline{I^\star}_{ij}) + \sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}  + WB_{ic}\right) +\\
         &+n_e\left(\sum\limits_{j \neq i}\left(n_j\frac{i^2}{j^2}e^{X_i-X_j}-n_i\right)q_{ij}  + \left(n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}-n_i\right)q_{ic}\right). 
     \end{aligned}
 \end{equation}
 
+To approximately take into account continuum absorbtion we can multiply terms \(n_e^2(A_{ci} + WB_{ci})\) and \(n_iWB_{ci}\) by continuum escape propability \(\beta_{ic}\)
+\[
+    \beta_{ic} = \frac{1 - e^{-\tau_{ic}}}{\tau_{ic}} = \frac{1 - e^{-k_{ic}n_iz}}{k_{ic}n_iz} 
+\] 
+where \(k_{ic}\) is computed at the frequency \(\nu_{ci} = 13.6\ \mathrm{eV}/(i^2h)\) and \(z\) is the depth of the medium. So, finally
+
+\begin{equation}
+    \begin{aligned}
+        \sigma_i &= \sum\limits_{k=i+1}^\infty n_kA_{ki}\beta_{ik}(1 + W\overline{I^\star}_{ki}) + \sum\limits_{j=1}^{i-1} n_j\frac{i^2}{j^2}A_{ij}W\beta_{ji} \overline{I^\star}_{ij} +\beta_{ic}n_e^2(A_{ci} + \beta_{ic}WB_{ci}) -\\
+        &-n_i\left(\sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji}(1 + W\overline{I^\star}_{ij}) + \sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}  + \beta_{ic}WB_{ic}\right) +\\
+        &+n_e\left(\sum\limits_{j \neq i}\left(n_j\frac{i^2}{j^2}e^{X_i-X_j}-n_i\right)q_{ij}  + \left(n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}-n_i\right)q_{ic}\right). 
+    \end{aligned}
+\end{equation}
+
 \section{Sources linearization}
+
+\[
+\frac{\partial \beta}{\partial \tau} = \frac{e^{-\tau}}{\tau} - \frac{1-e^{-\tau}}{\tau^2} = \frac{1}{\tau} - \frac{1 - e^{-\tau}}{\tau}  - \frac{1 - e^{-\tau}}{\tau^2} = \frac{1-\beta}{\tau} - \beta
+\]
+
+\[
+    \tau_{lu} = \frac{c^3A_{ul}}{8\pi |\mathbf{n}\mathbf{\nabla}(\mathbf{v}\mathbf{n})|}\frac{u^2}{l^2} n_l \left(1 - \frac{n_u}{n_l}\frac{l^2}{u^2}\right)
+\]
+
+\[
+    \delta\tau_{lu} =  \frac{c^3A_{ul}}{8\pi |\mathbf{n}\mathbf{\nabla}(\mathbf{v}\mathbf{n})|}\left( \frac{u^2}{l^2}\delta n_l - \delta n_u \right)
+\]
+
+\[
+    \delta\beta_{lu} = \frac{\partial \beta_{lu}}{\partial \tau_{lu}} \frac{c^3A_{ul}}{8\pi |\mathbf{n}\mathbf{\nabla}(\mathbf{v}\mathbf{n})|}\left( \frac{u^2}{l^2}\delta n_l - \delta n_u \right) = (1 - \beta_{lu} - \beta_{lu}\tau_{lu})(n_lu^2 - n_ul^2)^{-1}(u^2\delta n_l - l^2 \delta n_u)
+\]
+
+
+\[
+    \delta\sigma_i = \sum\limits_{j = 1}^\infty S_{ij}\delta n_j + \sum\limits_{P \in \mathcal{P}}S_i[P]\delta{P}
+\]
+
+\begin{equation}
+    \begin{aligned}
+        S_{ii} = \sum\limits_{j=1}^{i-1} A_{ij}(1 + W\overline{I^\star}_{ij})\left(j^2n_i (1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1} -\beta_{ji}\right)
+    \end{aligned}
+\end{equation}
+
 
 \end{document}
