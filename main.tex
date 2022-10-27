@@ -119,9 +119,30 @@ where \(k_{ic}\) is computed at the frequency \(\nu_{ci} = 13.6\ \mathrm{eV}/(i^
 
 \begin{equation}
     \begin{aligned}
-        S_{ii} = \sum\limits_{j=1}^{i-1} A_{ij}(1 + W\overline{I^\star}_{ij})\left(j^2n_i (1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1} -\beta_{ji}\right)
+        S_{ii} &= \sum\limits_{j=1}^{i-1} A_{ij}(1 + W\overline{I^\star}_{ij})\left(j^2n_i (1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1} -\beta_{ji}\right)\\
+        &+\sum\limits_{j=1}^{i-1} n_j\frac{i^2}{j^2}A_{ij}W\overline{I^\star}_{ij}j^2(1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1}\\
+        &-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}(\beta_{ik} + k^2n_i(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1})\\
+        &+\sum\limits_{k=i+1}^\infty i^2n_kA_{ki}\frac{k^2}{i^2}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1}(1 + W\overline{I^\star}_{ki})
     \end{aligned}
 \end{equation}
 
+\begin{equation}
+    \begin{aligned}
+        S_{ii} &= \sum\limits_{j=1}^{i-1} A_{ij}W\overline{I^\star}_{ij}j^2n_i (1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1}\\
+        &-\sum\limits_{j=1}^{i-1} A_{ij}W\overline{I^\star}_{ij}i^2n_j(1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1}\\
+        &+\sum\limits_{j=1}^{i-1} A_{ij}\left(j^2n_i (1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1} -\beta_{ji}-\beta_{ji}W\overline{I^\star}_{ij}\right)\\
+        &-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}k^2n_i(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1}\\
+        &+\sum\limits_{k=i+1}^\infty i^2n_kA_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1}\\
+        &+\sum\limits_{k=i+1}^\infty i^2n_kA_{ki}\frac{k^2}{i^2}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1}-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}...
+    \end{aligned}
+\end{equation}
+
+\begin{equation}
+    \begin{aligned}
+        S_{ii} &= -\sum\limits_{j=1}^{i-1} A_{ij}W\overline{I^\star}_{ij}(1 - \beta_{ji} - \beta_{ji}\tau_{ji})-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})\\
+        &+\sum\limits_{j=1}^{i-1} A_{ij}\left(j^2n_i (1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1} -\beta_{ji}(1+W\overline{I^\star}_{ij})\right)\\
+        &+\sum\limits_{k=i+1}^\infty i^2n_kA_{ki}\frac{k^2}{i^2}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1}-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}...
+    \end{aligned}
+\end{equation}
 
 \end{document}
