@@ -114,35 +114,67 @@ where \(k_{ic}\) is computed at the frequency \(\nu_{ci} = 13.6\ \mathrm{eV}/(i^
 
 
 \[
-    \delta\sigma_i = \sum\limits_{j = 1}^\infty S_{ij}\delta n_j + \sum\limits_{P \in \mathcal{P}}S_i[P]\delta{P}
+    \delta\sigma_i = \sum\limits_{j = 1}^\infty \mathfrak{S}_{ij}\delta n_j + \sum\limits_{P \in \mathcal{P}}\mathfrak{S}_i[P]\delta{P}
 \]
-
+First, let's consider discrete radiative terms:
 \begin{equation}
     \begin{aligned}
-        S_{ii} &= \sum\limits_{j=1}^{i-1} A_{ij}(1 + W\overline{I^\star}_{ij})\left(j^2n_i (1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1} -\beta_{ji}\right)\\
+        \sigma_i &= \sum\limits_{k=i+1}^\infty n_kA_{ki}\beta_{ik}(1 + W\overline{I^\star}_{ki}) + \sum\limits_{j=1}^{i-1} n_j\frac{i^2}{j^2}A_{ij}W\beta_{ji} \overline{I^\star}_{ij} -\\
+        &-n_i\left(\sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji}(1 + W\overline{I^\star}_{ij}) + \sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}\right)\dots 
+    \end{aligned}
+\end{equation}
+After linearization (multiple steps)
+\begin{equation}
+    \begin{aligned}
+        \mathfrak{S}_{ii} &= \sum\limits_{j=1}^{i-1} A_{ij}(1 + W\overline{I^\star}_{ij})\left(j^2n_i (1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1} -\beta_{ji}\right)\\
         &+\sum\limits_{j=1}^{i-1} n_j\frac{i^2}{j^2}A_{ij}W\overline{I^\star}_{ij}j^2(1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1}\\
         &-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}(\beta_{ik} + k^2n_i(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1})\\
         &+\sum\limits_{k=i+1}^\infty i^2n_kA_{ki}\frac{k^2}{i^2}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1}(1 + W\overline{I^\star}_{ki})
     \end{aligned}
 \end{equation}
-
 \begin{equation}
     \begin{aligned}
-        S_{ii} &= \sum\limits_{j=1}^{i-1} A_{ij}W\overline{I^\star}_{ij}j^2n_i (1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1}\\
+        \mathfrak{S}_{ii} &= \sum\limits_{j=1}^{i-1} A_{ij}W\overline{I^\star}_{ij}j^2n_i (1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1}\\
         &-\sum\limits_{j=1}^{i-1} A_{ij}W\overline{I^\star}_{ij}i^2n_j(1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1}\\
         &+\sum\limits_{j=1}^{i-1} A_{ij}\left(j^2n_i (1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1} -\beta_{ji}-\beta_{ji}W\overline{I^\star}_{ij}\right)\\
         &-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}k^2n_i(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1}\\
         &+\sum\limits_{k=i+1}^\infty i^2n_kA_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1}\\
-        &+\sum\limits_{k=i+1}^\infty i^2n_kA_{ki}\frac{k^2}{i^2}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1}-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}...
+        &+\sum\limits_{k=i+1}^\infty i^2n_kA_{ki}\frac{k^2}{i^2}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1}-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}\dots
     \end{aligned}
 \end{equation}
-
 \begin{equation}
     \begin{aligned}
-        S_{ii} &= -\sum\limits_{j=1}^{i-1} A_{ij}W\overline{I^\star}_{ij}(1 - \beta_{ji} - \beta_{ji}\tau_{ji})-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})\\
+        \mathfrak{S}_{ii} &= -\sum\limits_{j=1}^{i-1} A_{ij}W\overline{I^\star}_{ij}(1 - \beta_{ji} - \beta_{ji}\tau_{ji})-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})\\
         &+\sum\limits_{j=1}^{i-1} A_{ij}\left(j^2n_i (1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1} -\beta_{ji}(1+W\overline{I^\star}_{ij})\right)\\
-        &+\sum\limits_{k=i+1}^\infty i^2n_kA_{ki}\frac{k^2}{i^2}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1}-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}...
+        &+\sum\limits_{k=i+1}^\infty i^2n_kA_{ki}\frac{k^2}{i^2}(1 - \beta_{ik} - \beta_{ik}\tau_{ik})(n_ik^2 - n_ki^2)^{-1}-\sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}\dots
     \end{aligned}
+\end{equation}
+if we let (assuming \(u > l\))
+\[
+    A_{lu} = \frac{u^2}{l^2}A_{ul},\ \overline{I^\star}_{lu} = \overline{I^\star}_{ul},\ \overline{S}_{lu} = \overline{S}_{ul} \ \mathrm{and}\ \tau_{ul} = \tau_{lu}
+\]
+\begin{equation}
+    \begin{aligned}
+        \mathfrak{S}_{ii} &= \sum\limits_{j \neq i}^{\infty} A_{ij}\left((1 - \beta_{ji} - \beta_{ji}\tau_{ji})(\overline{S}_{ij} - W\overline{I^\star}_{ij}) -\beta_{ji}W\overline{I^\star}_{ij}\right) - \sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji}\dots
+    \end{aligned}
+\end{equation}
+\begin{equation}
+    \mathfrak{S}_{ik} = A_{ki}(1 + W\overline{I}_{ki})(1 - \beta_{ik}\tau_{ik}) - A_{ki}n_ik^2(1 - \beta_{ik} - \beta_{ik}\tau{ik})(n_ik^2 - n_ki^2)^{-1}\dots
+\end{equation}
+\begin{equation}
+    \mathfrak{S}_{ij} = A_{ij}\frac{i^2}{j^2}W\overline{I}_{ij}(1  - \beta_{ji}\tau_{ji}) - A_{ij}n_ii^2(1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1}\dots
+\end{equation}
+
+Radiative continuum terms
+\[
+    \sigma_i = \beta_{ic}(n_e^2(A_{ci} + \beta_{ic}WB_{ci}) - n_iWB_{ic})...
+\]
+\[
+    \delta \beta_{ic} = (1 - \beta_{ic} - \beta_{ic}\tau_{ic})\left(n_i^{-1}\delta n_i + k_{ic}^{-1}\frac{\partial k_{ic}}{\partial T}\delta T + z^{-1}\delta z\right)
+\]
+after linearization
+\begin{equation}
+    \delta\sigma_i = 2n_e\beta_{ic}(A_{ci} + \beta_{ic}WB_{ci})\delta n_e + (n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\delta\beta_{ic} - \beta_{ic}WB_{ic}\delta n_i + (n_e^2\beta_{ic}^2B_{ci} - n_iB_{ic})\delta W
 \end{equation}
 
 \end{document}
