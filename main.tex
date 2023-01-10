@@ -99,6 +99,10 @@ where \(k_{ic}\) is computed at the frequency \(\nu_{ci} = 13.6\ \mathrm{eV}/(i^
 \[
 \frac{\partial \beta}{\partial \tau} = \frac{e^{-\tau}}{\tau} - \frac{1-e^{-\tau}}{\tau^2} = \frac{1}{\tau} - \frac{1 - e^{-\tau}}{\tau}  - \frac{1 - e^{-\tau}}{\tau^2} = \frac{1-\beta}{\tau} - \beta
 \]
+Let's define \(\alpha\) as
+\[
+\frac{\partial \beta}{\partial \tau} = \frac{1-\beta}{\tau} - \beta = \alpha \tau^{-1}
+\]
 
 \[
     \tau_{lu} = \frac{c^3A_{ul}}{8\pi |\mathbf{n}\mathbf{\nabla}(\mathbf{v}\mathbf{n})|}\frac{u^2}{l^2} n_l \left(1 - \frac{n_u}{n_l}\frac{l^2}{u^2}\right)
@@ -109,13 +113,14 @@ where \(k_{ic}\) is computed at the frequency \(\nu_{ci} = 13.6\ \mathrm{eV}/(i^
 \]
 
 \[
-    \delta\beta_{lu} = \frac{\partial \beta_{lu}}{\partial \tau_{lu}} \frac{c^3A_{ul}}{8\pi |\mathbf{n}\mathbf{\nabla}(\mathbf{v}\mathbf{n})|}\left( \frac{u^2}{l^2}\delta n_l - \delta n_u \right) = (1 - \beta_{lu} - \beta_{lu}\tau_{lu})(n_lu^2 - n_ul^2)^{-1}(u^2\delta n_l - l^2 \delta n_u)
+    \delta\beta_{lu} = \frac{\partial \beta_{lu}}{\partial \tau_{lu}} \frac{c^3A_{ul}}{8\pi |\mathbf{n}\mathbf{\nabla}(\mathbf{v}\mathbf{n})|}\left( \frac{u^2}{l^2}\delta n_l - \delta n_u \right) = \alpha_{lu}(n_lu^2 - n_ul^2)^{-1}(u^2\delta n_l - l^2 \delta n_u)
 \]
 
 
 \[
-    \delta\sigma_i = \sum\limits_{j = 1}^\infty \mathfrak{S}_{ij}\delta n_j + \sum\limits_{P \in \mathcal{P}}\mathfrak{S}_i[P]\delta{P}
+    \delta\sigma_i = \sum\limits_{j = 1}^\infty  \left(\mathfrak{S}_{ij}-\mathfrak{S}[n_\mathrm{H}]\right)\delta n_j + \sum\limits_{P \in \mathcal{P}}\mathfrak{S}_i[P]\delta{P}
 \]
+\subsection{Radiative terms}
 First, let's consider discrete radiative terms:
 \begin{equation}
     \begin{aligned}
@@ -155,26 +160,105 @@ if we let (assuming \(u > l\))
 \]
 \begin{equation}
     \begin{aligned}
-        \mathfrak{S}_{ii} &= \sum\limits_{j \neq i}^{\infty} A_{ij}\left((1 - \beta_{ji} - \beta_{ji}\tau_{ji})(\overline{S}_{ij} - W\overline{I^\star}_{ij}) -\beta_{ji}W\overline{I^\star}_{ij}\right) - \sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji}\dots
+        \mathfrak{S}_{ii} &= \sum\limits_{j \neq i}^{\infty} A_{ij}\left(\alpha_{ji}(\overline{S}_{ij} - W\overline{I^\star}_{ij}) -\beta_{ji}W\overline{I^\star}_{ij}\right) - \sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji}\dots
     \end{aligned}
 \end{equation}
 \begin{equation}
-    \mathfrak{S}_{ik} = A_{ki}(1 + W\overline{I}_{ki})(1 - \beta_{ik}\tau_{ik}) - A_{ki}n_ik^2(1 - \beta_{ik} - \beta_{ik}\tau{ik})(n_ik^2 - n_ki^2)^{-1}\dots
+    \mathfrak{S}_{lu} = A_{ul}(1 + W\overline{I}_{ul})(\alpha_{lu} + \beta_{lu}) - A_{ul}n_lu^2\alpha_{lu}(n_lu^2 - n_ul^2)^{-1}\dots
 \end{equation}
 \begin{equation}
-    \mathfrak{S}_{ij} = A_{ij}\frac{i^2}{j^2}W\overline{I}_{ij}(1  - \beta_{ji}\tau_{ji}) - A_{ij}n_ii^2(1 - \beta_{ji} - \beta_{ji}\tau_{ji})(n_ji^2 - n_ij^2)^{-1}\dots
+    \mathfrak{S}_{ul} = A_{ul}\frac{u^2}{l^2}W\overline{I}_{ul}(\alpha_{lu}  + \beta_{lu}) - A_{ul}n_uu^2\alpha_{lu}(n_lu^2 - n_ul^2)^{-1}\dots
 \end{equation}
-
+\begin{equation}
+    \begin{aligned}
+        \mathfrak{S}[W] &= \sum\limits_{j\neq i}^\infty (n_j-n_i)A_{ji}\beta_{ij}\overline{I^\star}_{ji} \ldots
+    \end{aligned}\end{equation}
 Radiative continuum terms
 \[
     \sigma_i = \beta_{ic}(n_e^2(A_{ci} + \beta_{ic}WB_{ci}) - n_iWB_{ic})...
 \]
 \[
-    \delta \beta_{ic} = (1 - \beta_{ic} - \beta_{ic}\tau_{ic})\left(n_i^{-1}\delta n_i + k_{ic}^{-1}\frac{\partial k_{ic}}{\partial T}\delta T + z^{-1}\delta z\right)
+    \delta \beta_{ic} = \alpha_{ic}\left(n_i^{-1}\delta n_i + k_{ic}^{-1}\frac{\partial k_{ic}}{\partial T_e}\delta T_e + z^{-1}\delta z\right)
 \]
 after linearization
 \begin{equation}
     \delta\sigma_i = 2n_e\beta_{ic}(A_{ci} + \beta_{ic}WB_{ci})\delta n_e + (n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\delta\beta_{ic} - \beta_{ic}WB_{ic}\delta n_i + (n_e^2\beta_{ic}^2B_{ci} - n_iB_{ic})\delta W
 \end{equation}
+and
+\begin{equation}
+    \delta n_e = \delta n_\mathrm{H} - \sum\limits_{i=1}^\infty\delta n_i
+\end{equation}
+So
+\begin{equation}
+    \begin{aligned}
+        \mathfrak{S}_{ii} &= \ldots \alpha_{ic}(n_e^2n_i^{-1}(A_{ci} + 2\beta_{ic}WB_{ci}) - WB_{ic}) - \beta_{ic}WB_{ic}\ldots   \\ 
+        \mathfrak{S}[T_e] &= (n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\alpha_{ic}k_{ic}^{-1}\frac{\partial k_{ic}}{\partial T_e} \ldots\\
+        \mathfrak{S}[z] &= (n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\alpha_{ic}z^{-1} \ldots\\
+        \mathfrak{S}[W] &= \ldots (n_e^2\beta_{ic}^2B_{ci} - n_iB_{ic})\\
+        \mathfrak{S}[n_\mathrm{H}] &= 2n_e\beta_{ic}(A_{ci} + \beta_{ic}WB_{ci})\ldots
+    \end{aligned}
+\end{equation}
+\subsection{Collisional terms}
+From collisional terms
+\begin{equation}
+    \begin{aligned}
+        \delta\sigma_i = \ldots &\left(\sum\limits_{j \neq i}\left(n_j\frac{i^2}{j^2}e^{X_i-X_j}-n_i\right)q_{ij}  + \left(3n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}-n_i\right)q_{ic}\right)\delta n_e - \\
+        & n_e\left(\sum\limits_{i \neq j}q_{ij} + q_{ic}\right)\delta n_i + n_e \sum\limits_{i\neq j}\frac{i^2}{j^2}e^{X_i-X_j}q_{ij}\delta n_j + \\
+        & n_e\left(\sum\limits_{j \neq i}\left(n_j\frac{i^2}{j^2}e^{X_i-X_j}-n_i\right)\frac{\partial q_{ij}}{\partial T_e}  + \left(n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}-n_i\right)\frac{\partial q_{ic}}{\partial T_e}\right)\delta T_e + \\
+        & n_eT_e^{-1}\left(\sum\limits_{j \neq i}n_j\frac{i^2}{j^2}e^{X_i-X_j}q_{ij}(X_i - X_j) + n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}q_{ic}\left(\frac{3}{2} + X_i\right)\right)\delta T_e 
+    \end{aligned}
+\end{equation}
+So
+\begin{equation}
+    \begin{aligned}
+        \mathfrak{S}_{ii} &= \ldots n_e\left(\sum\limits_{i \neq j}q_{ij} + q_{ic}\right)\\
+        \mathfrak{S}_{ij} &= \ldots n_e\frac{i^2}{j^2}e^{X_i-X_j}q_{ij}
+    \end{aligned}
+\end{equation}
+and
+\begin{equation}
+    \begin{aligned}
+        \mathfrak{S}[n_\mathrm{H}] = \ldots& \left(\sum\limits_{j \neq i}\left(n_j\frac{i^2}{j^2}e^{X_i-X_j}-n_i\right)q_{ij}  + \left(3n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}-n_i\right)q_{ic}\right) \\
+        \mathfrak{S}[T_e] = \ldots & n_e\left(\sum\limits_{j \neq i}\left(n_j\frac{i^2}{j^2}e^{X_i-X_j}-n_i\right)\frac{\partial q_{ij}}{\partial T_e}  + \left(n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}-n_i\right)\frac{\partial q_{ic}}{\partial T_e}\right) + \\
+        & n_eT_e^{-1}\left(\sum\limits_{j \neq i}n_j\frac{i^2}{j^2}e^{X_i-X_j}q_{ij}(X_i - X_j) + n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}q_{ic}\left(\frac{3}{2} + X_i\right)\right)
+    \end{aligned}
+\end{equation}
+\newpage
+
+\subsection{Full expression}
+Equation:
+\begin{equation}
+    \begin{aligned}
+        \sigma_i &= \sum\limits_{k=i+1}^\infty n_kA_{ki}\beta_{ik}(1 + W\overline{I^\star}_{ki}) + \sum\limits_{j=1}^{i-1} n_j\frac{i^2}{j^2}A_{ij}W\beta_{ji} \overline{I^\star}_{ij} +\beta_{ic}n_e^2(A_{ci} + \beta_{ic}WB_{ci}) -\\
+        &-n_i\left(\sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji}(1 + W\overline{I^\star}_{ij}) + \sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}  + \beta_{ic}WB_{ic}\right) +\\
+        &+n_e\left(\sum\limits_{j \neq i}\left(n_j\frac{i^2}{j^2}e^{X_i-X_j}-n_i\right)q_{ij}  + \left(n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}-n_i\right)q_{ic}\right). 
+    \end{aligned}
+\end{equation}
+Linearization (\([P],\ P \in \mathcal{P}\) --- variable parameter):
+\[
+    \delta\sigma_i = \sum\limits_{j = 1}^\infty  \left(\mathfrak{S}_{ij}-\mathfrak{S}[n_\mathrm{H}]\right)\delta n_j + \sum\limits_{P \in \mathcal{P}}\mathfrak{S}_i[P]\delta{P}.
+\]
+Level populations matrix:
+\begin{equation}
+    \begin{aligned}
+        \mathfrak{S}_{ii} =& \sum\limits_{j \neq i}^{\infty} A_{ij}\left(\alpha_{ji}(\overline{S}_{ij} - W\overline{I^\star}_{ij}) -\beta_{ji}W\overline{I^\star}_{ij}\right) - \sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji} + \\
+        &n_e\left(\sum\limits_{i \neq j}q_{ij} + q_{ic}\right) + \alpha_{ic}(n_e^2n_i^{-1}(A_{ci} + 2\beta_{ic}WB_{ci}) - WB_{ic}) - \beta_{ic}WB_{ic}\\
+        \mathfrak{S}_{lu} =& A_{ul}(1 + W\overline{I}_{ul})(\alpha_{lu} + \beta_{lu}) - A_{ul}n_lu^2\alpha_{lu}(n_lu^2 - n_ul^2)^{-1} + n_e\frac{l^2}{u^2}e^{X_l-X_u}q_{lu}\\
+        \mathfrak{S}_{ul} =& A_{ul}\frac{u^2}{l^2}W\overline{I}_{ul}(\alpha_{lu}  + \beta_{lu}) - A_{ul}n_uu^2\alpha_{lu}(n_lu^2 - n_ul^2)^{-1} + n_e \frac{u^2}{l^2}e^{X_u-X_l}q_{ul}.
+    \end{aligned}
+\end{equation}
+Parameter vectors:
+\begin{equation}
+    \begin{aligned}
+        \mathfrak{S}[z] = &(n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\alpha_{ic}z^{-1}\\
+        \mathfrak{S}[W] = &\sum\limits_{j\neq i}^\infty (n_j-n_i)A_{ji}\beta_{ij}\overline{I^\star}_{ji} + (n_e^2\beta_{ic}^2B_{ci} - n_iB_{ic})\\
+        \mathfrak{S}[n_\mathrm{H}] = & \left(\sum\limits_{j \neq i}\left(n_j\frac{i^2}{j^2}e^{X_i-X_j}-n_i\right)q_{ij}  + \left(3n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}-n_i\right)q_{ic}\right) + \\
+        &2n_e\beta_{ic}(A_{ci} + \beta_{ic}WB_{ci})\\
+        \mathfrak{S}[T_e] = & n_eT_e^{-1}\left(\sum\limits_{j \neq i}n_j\frac{i^2}{j^2}e^{X_i-X_j}q_{ij}(X_i - X_j) + n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}q_{ic}\left(\frac{3}{2} + X_i\right)\right)+\\
+        & n_e\left(\sum\limits_{j \neq i}\left(n_j\frac{i^2}{j^2}e^{X_i-X_j}-n_i\right)\frac{\partial q_{ij}}{\partial T_e}  + \left(n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}-n_i\right)\frac{\partial q_{ic}}{\partial T_e}\right) + \\
+        & (n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\alpha_{ic}k_{ic}^{-1}\frac{\partial k_{ic}}{\partial T_e}.
+    \end{aligned}
+\end{equation}
+
 
 \end{document}
