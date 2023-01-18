@@ -19,7 +19,19 @@
 
 \begin{document}
 \maketitle
-    
+
+
+\section{Level populations equation}
+
+Level populations can be found by solving the system of equations
+\begin{equation}
+    \frac{\partial n_i}{\partial t} + \nabla\cdot(n_i \mathbf{v}) = \sigma_i.
+\end{equation}
+In steady flow in 1D with coordinate \(s\) the equation  becomes
+\begin{equation}\label{eq:1d-full}
+    \frac{d}{ds}\left(n_i v\right) = v\frac{dn_i}{ds} + n_i\frac{dv}{ds} = \sigma_i
+\end{equation}
+
 \section{Sources of hydrogen atom levels populations in 1D case}
 
 Sources of populations for each hydrogen energy level are written as
@@ -64,7 +76,7 @@ and using relations between einstein coefficients
 A_{ul} = \frac{2h\nu_{ul}^3}{c^2}B_{ul}\ \mathrm{and}\ \frac{B_{ul}}{B_{lu}} = \frac{l^2}{u^2},
 \]
 we get
-\begin{equation}
+\begin{equation}\label{eq:sources-bi}
     \begin{aligned}
         \frac{(2\pi m_ek_BT_e)^{3/2}}{n_e^2i^2h^3}e^{-X_i}\sigma_i &= \sum\limits_{k=i+1}^\infty b_k\frac{k^2}{i^2}e^{X_k-X_i}A_{ki}\beta_{ik}(1 + W\overline{I^\star}_{ki}) + \sum\limits_{j=1}^{i-1} b_je^{X_j-X_i}A_{ij}W\beta_{ji} \overline{I^\star}_{ij} +\\
         &+\frac{(2\pi m_ek_BT_e)^{3/2}}{i^2h^3}e^{-X_i}(A_{ci} + WB_{ci}) +n_e\left(\sum\limits_{j \neq i}(b_j-b_i)q_{ij}  + (1-b_i)q_{ic}\right)-\\
@@ -92,6 +104,57 @@ where \(k_{ic}\) is computed at the frequency \(\nu_{ci} = 13.6\ \mathrm{eV}/(i^
         &-n_i\left(\sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji}(1 + W\overline{I^\star}_{ij}) + \sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}  + \beta_{ic}WB_{ic}\right) +\\
         &+n_e\left(\sum\limits_{j \neq i}\left(n_j\frac{i^2}{j^2}e^{X_i-X_j}-n_i\right)q_{ij}  + \left(n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}-n_i\right)q_{ic}\right). 
     \end{aligned}
+\end{equation}
+
+
+\section{Stationary solution}
+
+From \eqref{eq:sources-bi}, assuming \(\sigma_i = 0\)
+\begin{equation}\label{eq:stat-bi}
+    \begin{aligned}
+        &\sum\limits_{k=i+1}^\infty b_k\frac{k^2}{i^2}e^{X_k-X_i}A_{ki}\beta_{ik}(1 + W\overline{I^\star}_{ki}) + \sum\limits_{j=1}^{i-1} b_je^{X_j-X_i}A_{ij}W\beta_{ji} \overline{I^\star}_{ij} +\\
+        &+\frac{(2\pi m_ek_BT_e)^{3/2}}{i^2h^3}e^{-X_i}(A_{ci} + WB_{ci}\beta_{ic})\beta_{ic} +n_e\left(\sum\limits_{j \neq i}(b_j-b_i)q_{ij}  + (1-b_i)q_{ic}\right)-\\
+        &-b_i\left(\sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji}(1 + W\overline{I^\star}_{ij}) + \sum\limits_{k=i+1}^\infty A_{ki}\frac{k^2}{i^2}W\overline{I^\star}_{ki}\beta_{ik}  + WB_{ic}\beta_{ic}\right) = 0.
+    \end{aligned}
+\end{equation}
+We can rewrite this as 
+\begin{equation}
+    \mathcal{M}\mathbf{b} = -\mathbf{R},
+\end{equation}
+where \(\mathcal{M}\) is a matrix
+\begin{equation}
+    \begin{aligned}
+        \mathcal{M}_{ii} &= -\sum\limits_{j=1}^{i-1}A_{ij}\beta_{ji} - \sum\limits_{i\neq j}^\infty A_{ij}W\overline{I^\star}_{ij}\beta_{ij}  - WB_{ic}\beta_{ic} - n_e\left(\sum\limits_{i\neq j} q_{ij} + q_{ic}\right)\\
+        \mathcal{M}_{ul} &= e^{X_u-X_l}A_{lu}\beta_{lu}(1 + W\overline{I^\star}_{ul}) + n_eq_{lu}\\
+        \mathcal{M}_{lu} &= e^{X_l-X_u}A_{ul}W\beta_{ul} \overline{I^\star}_{ul} + n_eq_{ul}
+    \end{aligned}
+\end{equation}
+and \(\mathbf{R}\) is a vector
+\begin{equation}
+    R_i = \frac{(2\pi m_ek_BT_e)^{3/2}}{i^2h^3}e^{-X_i}(A_{ci} + WB_{ci}\beta_{ic})\beta_{ic} + n_eq_{ic}.
+\end{equation}
+The solution to this system of equations is \(\mathbf{\bar{b}}\), which can be transformed back to level populations \(\mathbf{\bar{n}}\) using
+\begin{equation}
+    \bar{n}_i = \bar{n}_e^2\bar{b}_i\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i},
+\end{equation}
+where \(\bar{n}_e = n_\mathrm{H} - \sum\limits_{i = 1}^{\infty}\bar{n}_i\).
+
+\section{Linear approximation}
+
+Let's asume that temperature \(T_e\) and density \(n_\mathrm{H}\) are slightly perturbed along \(s\)
+\begin{equation}
+\begin{aligned}
+    T_e &= \bar{T}_e + \delta T_e = \bar{T}_e + \tilde{T}_e e^{iks}\\
+    n_\mathrm{H} &= \bar{n}_\mathrm{H} + \delta n_\mathrm{H} = \bar{n}_\mathrm{H} + \tilde{n}_\mathrm{H} e^{iks},
+\end{aligned}
+\end{equation}
+and approximate the solution to equation \eqref{eq:1d-full} as
+\begin{equation}
+n_i = \bar{n}_i + \delta n_i = \bar{n}_i + \tilde{n}_i e^{iks}.
+\end{equation}
+Thus, equation \eqref{eq:1d-full} can be simlified as
+\begin{equation}
+    iksv\delta n_i + n_i
 \end{equation}
 
 \section{Sources linearization}
@@ -262,3 +325,5 @@ Parameter vectors:
 
 
 \end{document}
+
+
