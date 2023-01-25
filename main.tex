@@ -150,13 +150,14 @@ Let's asume that temperature \(T_e\) and density \(n_\mathrm{H}\) are slightly p
 \end{equation}
 and approximate the solution to equation \eqref{eq:1d-full} as
 \begin{equation}
-n_i = \bar{n}_i + \delta n_i = \bar{n}_i + \tilde{n}_i e^{iks}.
+n_i = \bar{n}_i + \delta n_i = \bar{n}_i + \tilde{n}_i e^{-iks}.
 \end{equation}
-Thus, equation \eqref{eq:1d-full} can be simlified as
+Thus, if we assume that the velocity \(v\) doesn't change much at the scale \(k^{-1}\), equation \eqref{eq:1d-full} can be liniarized as
 \begin{equation}
-    iksv\delta n_i + n_i
+    -iksv\delta n_i = \delta\sigma_i,
 \end{equation}
-
+because \(\bar{n}_i\) are defined as the solution to the equation \(\sigma_i = 0\). 
+ 
 \section{Sources linearization}
 
 \[
@@ -323,6 +324,9 @@ Parameter vectors:
     \end{aligned}
 \end{equation}
 
+\section{Solving the linearized equation}
+
+All perturbation terms have \(e^{-iks}\)
 
 \end{document}
 
