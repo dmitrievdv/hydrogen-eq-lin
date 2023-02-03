@@ -246,7 +246,10 @@ Radiative continuum terms
 \]
 after linearization
 \begin{equation}
-    \delta\sigma_i = 2n_e\beta_{ic}(A_{ci} + \beta_{ic}WB_{ci})\delta n_e + (n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\delta\beta_{ic} - \beta_{ic}WB_{ic}\delta n_i + (n_e^2\beta_{ic}^2B_{ci} - n_iB_{ic})\delta W
+    \begin{aligned}
+        \delta\sigma_i &= 2n_e\beta_{ic}(A_{ci} + \beta_{ic}WB_{ci})\delta n_e - \beta_{ic}WB_{ic}\delta n_i + (n_e^2\beta_{ic}^2B_{ci} - n_iB_{ic})\delta W \\
+        &+ (n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\delta\beta_{ic} + \beta_{ic}\left(n_e^2\left(\frac{\partial A_{ci}}{\partial T} + \beta_{ic}W\frac{\partial B_{ci}}{\partial T}\right) - n_iW\frac{\partial B_{ic}}{\partial T}\right)\delta T_e
+    \end{aligned}
 \end{equation}
 and
 \begin{equation}
@@ -256,7 +259,7 @@ So
 \begin{equation}
     \begin{aligned}
         \mathfrak{S}_{ii} &= \ldots \alpha_{ic}(n_e^2n_i^{-1}(A_{ci} + 2\beta_{ic}WB_{ci}) - WB_{ic}) - \beta_{ic}WB_{ic}\ldots   \\ 
-        \mathfrak{S}[T_e] &= (n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\alpha_{ic}k_{ic}^{-1}\frac{\partial k_{ic}}{\partial T_e} \ldots\\
+        \mathfrak{S}[T_e] &= (n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\alpha_{ic}k_{ic}^{-1}\frac{\partial k_{ic}}{\partial T_e} + \beta_{ic}\left(n_e^2\left(\frac{\partial A_{ci}}{\partial T} + \beta_{ic}W\frac{\partial B_{ci}}{\partial T}\right) - n_iW\frac{\partial B_{ic}}{\partial T}\right) \ldots\\
         \mathfrak{S}[z] &= (n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\alpha_{ic}z^{-1} \ldots\\
         \mathfrak{S}[W] &= \ldots (n_e^2\beta_{ic}^2B_{ci} - n_iB_{ic})\\
         \mathfrak{S}[n_\mathrm{H}] &= 2n_e\beta_{ic}(A_{ci} + \beta_{ic}WB_{ci})\ldots
@@ -320,13 +323,29 @@ Parameter vectors:
         &2n_e\beta_{ic}(A_{ci} + \beta_{ic}WB_{ci})\\
         \mathfrak{S}[T_e] = & n_eT_e^{-1}\left(\sum\limits_{j \neq i}n_j\frac{i^2}{j^2}e^{X_i-X_j}q_{ij}(X_i - X_j) + n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}q_{ic}\left(\frac{3}{2} + X_i\right)\right)+\\
         & n_e\left(\sum\limits_{j \neq i}\left(n_j\frac{i^2}{j^2}e^{X_i-X_j}-n_i\right)\frac{\partial q_{ij}}{\partial T_e}  + \left(n_e^2\frac{i^2h^3}{(2\pi m_ek_BT_e)^{3/2}}e^{X_i}-n_i\right)\frac{\partial q_{ic}}{\partial T_e}\right) + \\
-        & (n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\alpha_{ic}k_{ic}^{-1}\frac{\partial k_{ic}}{\partial T_e}.
+        & (n_e^2(A_{ci} + 2\beta_{ic}WB_{ci}) - n_iWB_{ic})\alpha_{ic}k_{ic}^{-1}\frac{\partial k_{ic}}{\partial T_e} + \beta_{ic}\left(n_e^2\left(\frac{\partial A_{ci}}{\partial T} + \beta_{ic}W\frac{\partial B_{ci}}{\partial T}\right) - n_iW\frac{\partial B_{ic}}{\partial T}\right).
     \end{aligned}
 \end{equation}
 
 \section{Solving the linearized equation}
 
-All perturbation terms have \(e^{-iks}\)
+After linearization the equation \eqref{eq:1d-full} simplifies to
+\begin{equation}
+    -iksv\delta n_i = \delta \sigma_i.
+\end{equation}
+It is convenient to define 
+\[f_i = \frac{n_i}{\bar{n}_i},\]
+so
+\[\delta n_i = \delta f_i \bar{n}_i,\] 
+and thus
+\begin{equation}
+    -iksv\delta f_i = \bar{n}_i^{-1}\delta \sigma_i.
+\end{equation}
+Because all \(\delta\) terms contain \(e^{iks}\) we can replace them with \(\sim\) terms
+\begin{equation}
+    -iksv\tilde{f}_i =  \bar{n}_i^{-1}\sum\limits_{j = 1}^\infty  \left(\mathfrak{S}_{ij}-\mathfrak{S}[n_\mathrm{H}]\right)\bar{n}_j \tilde{f}_j + \bar{n}_i^{-1}\sum\limits_{P \in \mathcal{P}}\mathfrak{S}_i[P]\tilde{P}
+\end{equation}
+
 
 \end{document}
 
